@@ -1,0 +1,31 @@
+Using the default profile...
+Feature: View Categories
+  As an admin
+  I want to view the Categories page to create/edit categories
+
+  Background:                            # features/view_categories.feature:5
+    Given the blog is set up             # features/step_definitions/web_steps.rb:34
+    And I am logged into the admin panel # features/step_definitions/web_steps.rb:46
+    When I follow "Categories"           # features/step_definitions/web_steps.rb:80
+
+  Scenario: Categories page should be visible # features/view_categories.feature:10
+    Then I should see "Categories"            # features/step_definitions/web_steps.rb:129
+    And I should see "Permalink"              # features/step_definitions/web_steps.rb:129
+    And I should see "Keywords"               # features/step_definitions/web_steps.rb:129
+    And I should see "Description"            # features/step_definitions/web_steps.rb:129
+
+  Scenario: Admin should be able to create new category  # features/view_categories.feature:16
+    When I fill in "Name" with "Test"                    # features/step_definitions/web_steps.rb:84
+    And I fill in "Description" with "Test Category"     # features/step_definitions/web_steps.rb:84
+    And I press "Save"                                   # features/step_definitions/web_steps.rb:76
+    Then I should see "Category was successfully saved." # features/step_definitions/web_steps.rb:129
+
+  Scenario: Admin should be able to edit existing category # features/view_categories.feature:22
+    When I follow "General"                                # features/step_definitions/web_steps.rb:80
+    Then I fill in "Description" with "Test Category"      # features/step_definitions/web_steps.rb:84
+    And I press "Save"                                     # features/step_definitions/web_steps.rb:76
+    Then I should see "Category was successfully saved."   # features/step_definitions/web_steps.rb:129
+
+3 scenarios (3 passed)
+21 steps (21 passed)
+0m2.225s
