@@ -36,6 +36,20 @@ describe CategoriesController, "/index" do
       response.should render_template(:index)
     end
   end
+  
+  it 'should create a new category' do
+    post :new, :category =>{:name => "Test", :description => "Test category"}
+    assert_response :redirect, :action => "index"
+    assert_not_nil assigns(:category)
+    expect(flash[:notice]).to eq("Category was successfully saved.")
+  end
+  
+  it 'should edit an existing category' do
+    post :edit, :category =>{:name => "random1", :description => "random4"}
+    assert_response :redirect, :action => "index"
+    assert_not_nil assigns(:category)
+    expect(flash[:notice]).to eq("Category was successfully saved.")
+  end
 end
 
 describe CategoriesController, '#show' do
